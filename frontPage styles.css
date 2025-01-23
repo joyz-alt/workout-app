@@ -1,0 +1,149 @@
+body {
+    margin: 0;
+    background: #f5f5f5;
+}
+
+
+:root {
+    --primary-color: #323538;
+    --accent-color: #005f73;
+    --secondary-color: #f4f4f4;
+    --text-color: #333;
+    --bg-color: #fff;
+    --border-radius: 10px;
+    --max-width: 1200px;
+}
+
+header {
+    justify-content: center;
+    display: flex;
+    margin-top: 2em;
+}
+
+header img {
+    height: 5em;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+nav button{
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
+
+/*************************************
+*************carousel*****************
+*************************************/
+
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.carousel {
+    display: flex;
+    gap: 2rem;
+    /* was 1.5rem */
+    overflow-x: scroll;
+    scroll-behavior: auto;
+    width: 100%;
+}
+
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Blog Cards */
+.card {
+    flex: 0 0 calc(50% - 1rem);
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--border-radius);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    border-radius: var(--border-radius);
+}
+
+.card h3,
+.card a {
+    position: relative;
+    z-index: 2;
+}
+
+.card a {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+/* Different BG images per card */
+.card:nth-child(1) {
+    background-image: url("images/homepage slideshow equipement image.webp");
+}
+
+.card:nth-child(2) {
+    background-image: url("images/home page slideshow workout plan image.webp");
+}
+
+.card:nth-child(3) {
+    background-image: url("images/homepage slideshow nutrition image.webp");
+}
+
+.card:nth-child(4) {
+    background-image: url("images/homepage slideshow equipement image.webp");
+}
+
+.card:nth-child(5) {
+    background-image: url("images/home page slideshow workout plan image.webp");
+}
+
+.card:nth-child(6) {
+    background-image: url("images/homepage slideshow nutrition image.webp");
+}

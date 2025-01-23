@@ -1,0 +1,160 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #000000;
+}
+
+
+:root{
+    --accent-color: #005f73;
+
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+    padding: 20px 0;
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.app-title {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+/* Section Styles */
+.app-title {
+    padding: 10px;
+}
+
+/* Day Selector Styles */
+.day-label {
+    display: block;
+    text-align: center;
+    margin: 15px 0 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.days {
+    display: block;
+    width: 90%;
+    margin: 0 auto 20px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Workout Tiles Container */
+.workout-tiles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Workout Tile Styles */
+.workout,
+.tile {
+    background-color: #fff;
+    width: 90%;
+    max-width: 500px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.workout h2 {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.tile h2 {
+    color:  var(--accent-color);
+}
+
+/* Exercise Styles */
+.exercise {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.exercise:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.exercise h3 {
+    color: #000000;
+}
+
+.exercise p {
+    margin: 5px 0;
+    font-size: 0.95em;
+}
+
+/* Clock Styles */
+.time-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.clock {
+    display: inline-block;
+    background-color: #333;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.clock span {
+    color: #fff;
+    font-size: 1.2em;
+}
+
+.clock span:not(:last-child) {
+    margin-right: 5px;
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+    .workout-tiles {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .workout,
+    .tile {
+        width: 45%;
+        margin: 2.5%;
+    }
+
+    .workout h2,
+    .tile h2 {
+        font-size: 1.4em;
+    }
+}
