@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Today's Workout</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="workout page styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="app-title">
+        <h1>Today's Workout</h1>
+    </header>
+
+    <main>
+        <section id="workout-details" class="workout">
+            <!-- Content will be dynamically added -->
+        </section>
+    </main>
+
+    <script>
+        // Get the workout details from localStorage
+        const selectedWorkout = JSON.parse(localStorage.getItem("selectedWorkout"));
+
+        const workoutDetailsSection = document.getElementById("workout-details");
+
+        if (selectedWorkout) {
+            // Render the selected workout details
+            workoutDetailsSection.innerHTML = `
+                <h2>${selectedWorkout.name} - ${selectedWorkout.day}</h2>
+                <div class="exercise">
+                    <h3>${selectedWorkout.exercise}</h3>
+                    <p>${selectedWorkout.sets} sets</p>
+                    <p>${selectedWorkout.reps} reps</p>
+                </div>
+                <div class="time-container">
+                    <p>Current Time:</p>
+                    <div class="clock">
+                        <span id="hrs">00</span>
+                        <span>:</span>
+                        <span id="min">00</span>
+                        <span>:</span>
+                        <span id="sec">00</span>
+                    </div>
+                </div>
+            `;
+        } else {
+            workoutDetailsSection.innerHTML = `<p>No workout selected. Please return to the previous page and choose a workout.</p>`;
+        }
+
+        // Clock Logic
+        const hrs = document.getElementById("hrs");
+        const min = document.getElementById("min");
+        const sec = document.getElementById("sec");
+
+        setInterval(() => {
+            const currentTime = new Date();
+
+            hrs.innerHTML = String(currentTime.getHours()).padStart(2, "0");
+            min.innerHTML = String(currentTime.getMinutes()).padStart(2, "0");
+            sec.innerHTML = String(currentTime.getSeconds()).padStart(2, "0");
+        }, 1000);
+    </script>
+</body>
+
+</html>

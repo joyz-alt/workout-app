@@ -38,6 +38,25 @@ header img {
 }
 
 
+
+.create-new-workout {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+
+.create-new-workout p {
+    font-size: 20px;
+}
+
+.create-new-workout a {
+    background: rgba(206, 202, 202, 0.8);
+    color: var(--text-color);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
 /*************************************
 *************carousel*****************
 *************************************/
@@ -60,7 +79,7 @@ header img {
     width: 100%;
 }
 
-.carousel-title{
+.carousel-title {
     text-align: left;
     font-size: 1.5em;
     color: var(--primary-color);
@@ -184,4 +203,3 @@ header img {
 .bottom-nav .nav-item span {
     display: block;
 }
-
