@@ -5,7 +5,7 @@
     <title>Create a Workout</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../workout creator 2 css.css">
+    <link rel="stylesheet" href="workout creator 2 css.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
@@ -50,6 +50,15 @@
             <button type="button" id="add-exercise">Add Exercise</button>
 
             <p id="error-msg" style="font-weight: bold; margin-top: 1rem;"></p>
+
+            <label for="workout-image">Choose an Image:</label>
+            <select id="workout-image">
+                <option value="default1.jpg">Default Image 1</option>
+                <option value="default2.jpg">Default Image 2</option>
+                <!-- Add more options as needed -->
+            </select>
+            <input type="file" id="image-upload" accept="image/*">
+
 
         </form>
 
@@ -172,46 +181,18 @@
         });
 
 
-
-        // Populate "Today's Workout" and "Your Workouts" (existing logic remains)
-        document.addEventListener("DOMContentLoaded", () => {
-            const todayCarousel = document.querySelector("#today-workout .carousel");
-            const yourWorkoutsCarousel = document.querySelector("#workouts .carousel");
-
-            const currentDay = new Date().toLocaleString("en-US", { weekday: "long" }).toLowerCase();
-
-            // Populate "Today's Workout"
-            const todaysWorkouts = workouts.filter(workout => workout.day === currentDay);
-            if (todaysWorkouts.length > 0) {
-                todaysWorkouts.forEach(workout => {
-                    const workoutCard = createWorkoutCard(workout, "Start Workout");
-                    todayCarousel.appendChild(workoutCard);
-                });
-            } else {
-                todayCarousel.innerHTML = "<p>No workout scheduled for today.</p>";
-            }
-
-            // Populate "Your Workouts"
-            workouts.forEach(workout => {
-                const workoutCard = createWorkoutCard(workout, "Read More");
-                yourWorkoutsCarousel.appendChild(workoutCard);
-            });
-        });
-
         // Helper function to create workout cards
         function createWorkoutCard(workout, actionText) {
+            const exercisesText = Array.isArray(workout.exercises)
+                ? workout.exercises.join(', ')
+                : 'No exercises added';
             const card = document.createElement("div");
             card.classList.add("card");
-
             card.innerHTML = `
         <h3>${workout.name}</h3>
-        <p><strong>Exercise:</strong> ${workout.exercise}</p>
-        <p><strong>Reps:</strong> ${workout.reps}</p>
-        <p><strong>Sets:</strong> ${workout.sets}</p>
-        <p><strong>Day:</strong> ${workout.day.charAt(0).toUpperCase() + workout.day.slice(1)}</p>
+        <div>Exercises: ${exercisesText}</div>
         <a href="#" class="btn-link">${actionText}</a>
     `;
-
             return card;
         }
 
@@ -226,8 +207,21 @@
         document.getElementById("save-workout").addEventListener("click", () => {
             const workoutName = document.getElementById("workout-name").value;
             const day = document.getElementById("days").value;
-            const exercises = [];
+            const imageSelect = document.getElementById("workout-image").value;
+            const imageUpload = document.getElementById("image-upload").files[0];
+            let imageURL;
 
+            if (imageUpload) {
+                // Handle image upload if file is uploaded
+                // This assumes you have some way to handle file uploads, e.g., storing and retrieving URLs
+                imageURL = URL.createObjectURL(imageUpload);
+            } else {
+                // Use selected image from dropdown
+                imageURL = imageSelect;
+            }
+
+
+            const exercises = [];
             // Collect all exercises from the preview list
             document.querySelectorAll("#workout-list li").forEach(item => {
                 exercises.push(item.textContent);
@@ -237,24 +231,17 @@
                 const workout = {
                     name: workoutName,
                     day,
-                    exercises
+                    exercises: exercises, // Ensure exercises is always an array
+                    image: imageURL
                 };
-
                 workouts.push(workout);
                 localStorage.setItem("workouts", JSON.stringify(workouts));
-
-                // Clear all fields and the preview list
-                document.getElementById("workout-name").value = '';
-                document.getElementById("days").value = 'monday';
-                workoutList.innerHTML = '';
-                errorMsg.textContent = "Workout saved successfully!";
-                errorMsg.style.color = "green";
             } else {
-                errorMsg.textContent = "Please add at least one exercise and fill out the workout name!";
-                errorMsg.style.color = "red";
-                if (!workoutName) highlightEmptyField("workout-name");
+                alert("Please add at least one exercise and a name for the workout.");
             }
         });
+
+
 
     </script>
 </body>

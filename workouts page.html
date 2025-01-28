@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+
+    <title>frontpage</title>
+    <meta charset="UTF_8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="workouts page styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha384-..." crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <header>
+        <a href="/index.html"><img src="images/calfitlab logo.png"></img></a>
+        </a>
+    </header>
+
+    <section class="container">
+        <div class="create-new-workout" id="create-new-workout">
+            <a href="Workout creator 1.html">
+                <p>Create New Workout</p>
+            </a>
+
+        </div>
+    </section>
+
+    <section id="today-workout" class="section">
+        <div class="container">
+            <h2 class="carousel-title">Today's Workout</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel" id="today-workout-carousel">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="your-workout" class="section">
+        <div class="container">
+            <h2 class="carousel-title">Your Workouts</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel" id="your-workout-carousel"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blogs" class="section">
+        <div class="container">
+            <h2 class="carousel-title">Recommended Workouts</h2>
+            <div class="carousel-wrapper">
+                <div class="carousel">
+                    <div class="card">
+                        <h3>Bulk workout</h3>
+                        <a href="" class="btn-link">
+                            Read More
+                        </a>
+                    </div>
+                    <div class="card">
+                        <h3>cut workout</h3>
+                        <a href="#" class="btn-link">Read More</a>
+                    </div>
+                    <div class="card">
+                        <h3>winter arc workout</h3>
+                        <a href="#" class="btn-link">Read More</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <nav class="bottom-nav">
+        <a href="" class="nav-item">
+            <i class="fas fa-comment"></i>
+            <span>Chat</span>
+        </a>
+        <a href="" class="nav-item">
+            <i class="fas fa-dumbbell"></i>
+            <span>Workouts</span>
+        </a>
+        <a href="#profile" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+
+
+
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const workouts = JSON.parse(localStorage.getItem("workouts")) || [];
+            const today = new Date().toLocaleString("en-US", { weekday: "long" }).toLowerCase();
+
+            const todayCarousel = document.getElementById("today-workout-carousel");
+            const yourCarousel = document.getElementById("your-workout-carousel");
+
+            populateCarousel(workouts, today, todayCarousel);
+            populateCarousel(workouts, today, yourCarousel); // Optionally populate other carousels differently
+
+            function populateCarousel(workouts, today, carousel) {
+                const todaysWorkouts = workouts.filter(workout => workout.day.toLowerCase() === today);
+                if (todaysWorkouts.length > 0) {
+                    todaysWorkouts.forEach(workout => {
+                        const workoutCard = createWorkoutCard(workout);
+                        carousel.appendChild(workoutCard);
+                    });
+                } else {
+                    carousel.innerHTML = "<p>No workouts scheduled for today.</p>";
+                }
+            }
+           
+            function createWorkoutCard(workout) {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerHTML = `
+            <h3>${workout.name}</h3>
+            <div>Exercises: ${workout.exercises.join(', ')}</div>
+            <a href="#" class="btn-link">Start Workout</a>
+        `;
+                return card;
+            }
+        });
+
+    </script>
+
+</body>
+
+
+
+</html>
